@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#0a0c12}</style></head>
+<body><div id="out"></div>
+<script src="lib.js"></script>
+<script>
+const { person, head, CHAR, defs, PROPS, crowbar, PAL } = ART;
+const W = 1920, H = 2080, o = [];
+const label = (x, y, name, note, color) =>
+  `<text x="${x}" y="${y}" text-anchor="middle" font-family="DejaVu Sans" font-weight="bold" font-size="30" fill="${color || '#e8e3d8'}">${name}</text>` +
+  note.split('|').map((l, i) => `<text x="${x}" y="${y + 34 + i * 26}" text-anchor="middle" font-family="DejaVu Sans" font-size="20" fill="#8c93a3">${l}</text>`).join('');
+const card = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="#121722"/><ellipse cx="${x + w / 2}" cy="${y + h - 150}" rx="${w * 0.42}" ry="22" fill="#000" opacity=".45"/><circle cx="${x + w / 2}" cy="${y + h * 0.4}" r="${w * 0.6}" fill="url(#glowS)" opacity=".25"/>`;
+
+o.push(`<rect width="${W}" height="${H}" fill="#0a0c12"/>`);
+o.push(`<text x="40" y="70" font-family="DejaVu Sans" font-weight="bold" font-size="46" fill="#e8e3d8">06:00 · Episode 1 · <tspan fill="${PAL.sodium}">Characters</tspan></text>`);
+const swatches = ['#05070d', '#141a29', '#1e2638', '#2e4a50', '#f0a94b', '#ff3b30', '#b5332b', '#7f8c6c', '#dfe8b8', '#e8e1cf'];
+swatches.forEach((c, i) => o.push(`<rect x="${1270 + i * 62}" y="28" width="52" height="52" rx="8" fill="${c}" stroke="#2a3040"/>`));
+
+// Row 1 — people
+const row1 = [
+  ['Ksyusha, 16', 'crowbar in back pocket|two wristbands in hand', CHAR.ksyusha, { holdF: 'wristbands', fSh: 18, fEl: 50, pocket: true, expr: 'determined' }, PAL.sodium],
+  ['Ksyusha — run', 'crowbar in hand', CHAR.ksyusha, { fHip: 38, fKnee: -22, bHip: -28, bKnee: -48, fSh: -38, fEl: 80, bSh: 40, bEl: 60, lean: 14, crouch: 14, holdF: 'crowbar', expr: 'scared' }, PAL.sodium],
+  ['Tyoma, 8', 'never stops asking|"?" on his T-shirt', CHAR.tyoma, { fSh: 30, fEl: 40, head: -10, expr: 'curious' }, '#e8c46a'],
+  ['Tyoma — scared', 'reaches for her sleeve', CHAR.tyoma, { fSh: 75, fEl: 15, bSh: 10, bEl: 80, head: 4, expr: 'scared' }, '#e8c46a'],
+  ['Tall', 'hides his right hand|in the sleeve (bite)', CHAR.tall, { bSh: 30, bEl: 30, holdB: 'flashlight', flashA: 55, beam: 130, fSh: 10, fEl: 105, expr: 'stern' }],
+  ['Stocky', 'shoots first', CHAR.stocky, { fSh: 15, fEl: 85, bSh: 40, bEl: 70, holdF: 'rifle', rifleA: -62, expr: 'stern' }],
+  ['Guard', 'stadium checkpoint|bite check', CHAR.guard, { fSh: 15, fEl: 40, holdF: 'flashlight', flashA: 60, beam: 110, expr: 'none' }],
+];
+row1.forEach(([name, note, s, pose, col], i) => {
+  const x = 30 + i * 268, y = 110, w = 252, h = 820;
+  o.push(card(x, y, w, h));
+  o.push(`<clipPath id="c1_${i}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"/></clipPath>`);
+  o.push(`<g clip-path="url(#c1_${i})">${person(s, pose, x + w / 2 - 22, y + h - 150, 1.38)}</g>`);
+  o.push(label(x + w / 2, y + h - 90, name, note, col));
+});
+
+// Row 2 — infected + stranger
+o.push(`<text x="40" y="1000" font-family="DejaVu Sans" font-weight="bold" font-size="34" fill="#e8e3d8">The infected <tspan fill="#8c93a3" font-size="22" font-weight="normal">— stand still and listen; react to sound</tspan></text>`);
+const row2 = [
+  ['Listening', 'head tilted, motionless', CHAR.inf1, { lean: 10, head: 26, fSh: 6, fEl: 4, bSh: 2, bEl: 4, crouch: 6 }],
+  ['Turned', 'heard the crash', CHAR.inf2, { lean: -4, head: -16, fSh: 12, fEl: 10, facing: -1 }],
+  ['Running', 'after the sound', CHAR.inf3, { lean: 28, fHip: 45, fKnee: -15, bHip: -35, bKnee: -55, fSh: 85, fEl: 5, bSh: 70, bEl: 12, crouch: 20, head: -10 }],
+  ['???', 'voice from the stands|(next episode)', CHAR.stranger, { expr: 'glint' }, '#9aa6c0'],
+];
+row2.forEach(([name, note, s, pose, col], i) => {
+  const x = 30 + i * 268, y = 1030, w = 252, h = 640;
+  o.push(card(x, y, w, h));
+  o.push(`<clipPath id="c2_${i}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"/></clipPath>`);
+  o.push(`<g clip-path="url(#c2_${i})">${person(s, Object.assign({ expr: 'infected' }, pose), x + w / 2 - 10, y + h - 150, 1.05)}</g>`);
+  o.push(label(x + w / 2, y + h - 90, name, note, col || '#b8c79a'));
+});
+
+// Expressions
+const ex = 1110;
+o.push(`<text x="${ex}" y="1000" font-family="DejaVu Sans" font-weight="bold" font-size="34" fill="#e8e3d8">Faces</text>`);
+const faces = [
+  [CHAR.ksyusha, 'neutral', 'calm'], [CHAR.ksyusha, 'whisper', 'whisper'], [CHAR.ksyusha, 'scared', 'scared'], [CHAR.ksyusha, 'pain', 'nail'],
+  [CHAR.tyoma, 'curious', 'question'], [CHAR.tyoma, 'scared', 'scared'], [CHAR.ksyusha, 'shout', 'shout'], [CHAR.tall, 'stern', 'Tall'],
+];
+faces.forEach(([s, e, l], i) => {
+  const cx = ex + 95 + (i % 4) * 196, cy = 1135 + Math.floor(i / 4) * 280;
+  o.push(`<rect x="${cx - 88}" y="${cy - 105}" width="176" height="250" rx="16" fill="#121722"/>`);
+  o.push(`<g transform="translate(${cx - 10} ${cy}) scale(${80 / s.headR / 1.1})">${head(s, e)}</g>`);
+  o.push(`<text x="${cx}" y="${cy + 125}" text-anchor="middle" font-family="DejaVu Sans" font-size="22" fill="#8c93a3">${l}</text>`);
+});
+
+// Props
+o.push(`<text x="40" y="1740" font-family="DejaVu Sans" font-weight="bold" font-size="34" fill="#e8e3d8">Props</text>`);
+o.push(`<rect x="30" y="1770" width="1860" height="280" rx="18" fill="#121722"/>`);
+o.push(crowbar(140, 1820, 90, 260));
+o.push(PROPS.wristband(440, 1820, '0417', -4) + PROPS.wristband(470, 1900, '0418', 3));
+o.push(PROPS.clock(880, 1840, '04:10'));
+o.push(PROPS.palm(1250, 1800));
+o.push(PROPS.bite(1480, 1830));
+[['crowbar', 220], ['2 wristbands = 2 seats', 630], ['radio clock', 1030], ["Ksyusha's torn palm", 1335], ["Tall's bite", 1650]].forEach(([t, x]) =>
+  o.push(`<text x="${x}" y="2035" text-anchor="middle" font-family="DejaVu Sans" font-size="22" fill="#8c93a3">${t}</text>`));
+
+document.getElementById('out').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${defs()}${o.join('')}</svg>`;
+</script></body></html>
