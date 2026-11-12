@@ -1,0 +1,7 @@
+# Rebuildable intermediates (see SERIES.md "How to rebuild")
+episode*/out/video_final_silent.mp4
+episode*/out/mix.wav
+episode*/out/mix_pre.wav
+episode*/out/bed.wav
+episode*/voice/voice_final.wav
+episode*/anim/keys*/
