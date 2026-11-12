@@ -1,0 +1,5 @@
+frame 0/2657  0s
+frame 300/2657  47s
+frame 600/2657  96s
+[out#0/mp4 @ 0x55b6db0c6bc0] Error writing trailer: Immediate exit requested
+[out#0/mp4 @ 0x55b6db0c6bc0] Error closing file: Immediate exit requested
