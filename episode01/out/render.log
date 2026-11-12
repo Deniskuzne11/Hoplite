@@ -1,0 +1,10 @@
+frame 0/2632  0s
+frame 300/2632  33s
+frame 600/2632  72s
+frame 900/2632  115s
+frame 1200/2632  151s
+frame 1500/2632  193s
+frame 1800/2632  232s
+frame 2100/2632  271s
+frame 2400/2632  339s
+video ../out/draft_silent.mp4: 2632 frames in 377s
