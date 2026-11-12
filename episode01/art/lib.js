@@ -67,6 +67,9 @@
       numb: ['narrow', [0, 0], 'line'],
       stern: ['narrow', [0.09, -0.04], 'down'],
       shout: ['wide', [-0.12, 0.02], 'open'],
+      fever: ['narrow', [-0.07, 0.04], 'o'],
+      tired: ['narrow', [-0.05, 0.03], 'down'],
+      relieved: ['shut', [-0.06, 0.02], 'line'],
       infected: ['glow', null, 'slack'],
       glint: ['glint', null, null],
     };
@@ -105,6 +108,11 @@
       o.push(`<path d="M${n(r * 0.8)} ${n(-r * 0.02)}Q${n(r * 0.93)} ${n(r * 0.2)} ${n(r * 0.78)} ${n(r * 0.25)}" stroke="${shade(s.skin, -0.22)}" stroke-width="${n(r * 0.05)}" fill="none" stroke-linecap="round"/>`);
     }
     if (s.blush) o.push(`<ellipse cx="${n(r * 0.72)}" cy="${n(r * 0.36)}" rx="${n(r * 0.14)}" ry="${n(r * 0.08)}" fill="#d9776b" opacity=".3"/>`);
+    if (s.tired && mode !== 'glow') xs.forEach((x) => o.push(`<path d="M${n(x - ew * 1.4)} ${n(ey + ew * 1.7)}q${n(ew * 1.4)} ${n(ew * 1.1)} ${n(ew * 2.8)} 0" stroke="${shade(s.skin, -0.32)}" stroke-width="${n(r * 0.04)}" fill="none" stroke-linecap="round"/>`));
+    if (s.sweat) {
+      [[r * 0.62, -r * 0.42, 1], [r * 0.12, -r * 0.5, 0.8], [r * 0.86, r * 0.02, 0.7]].forEach(([x, y, k]) => o.push(`<path d="M${n(x)} ${n(y - r * 0.1 * k)}q${n(r * 0.07 * k)} ${n(r * 0.11 * k)} 0 ${n(r * 0.16 * k)}q${n(-r * 0.07 * k)} ${n(-r * 0.05 * k)} 0 ${n(-r * 0.16 * k)}z" fill="#cfe3f0" opacity=".85"/>`));
+      o.push(`<ellipse cx="${n(r * 0.66)}" cy="${n(r * 0.3)}" rx="${n(r * 0.16)}" ry="${n(r * 0.09)}" fill="#d9776b" opacity=".35"/>`);
+    }
     const mx = r * 0.3, my = r * 0.5, mc = shade(s.skin, -0.5);
     switch (mouth) {
       case 'line': o.push(`<path d="M${n(mx - r * 0.13)} ${n(my)}L${n(mx + r * 0.13)} ${n(my)}" stroke="${mc}" stroke-width="${n(r * 0.055)}" stroke-linecap="round"/>`); break;
@@ -213,6 +221,20 @@
         o.push(`<path d="M2 ${n(shY + 10)}L2 ${n(hipY - 10)}" stroke="#7d8792" stroke-width="4"/>`);
         o.push(`<rect x="${n(sw * 0.15)}" y="${n(shY + T * 0.18)}" width="${n(sw * 0.6)}" height="${n(T * 0.12)}" fill="#c9a43a"/>`);
         break;
+      case 'paramedic':
+        // reflective bands + a cross patch
+        o.push(`<rect x="${n(-sw - 4)}" y="${n(shY + T * 0.5)}" width="${n(sw * 2 + 8)}" height="${n(T * 0.08)}" fill="#c8ccc4"/><rect x="${n(-hw - 6)}" y="${n(shY + T * 0.72)}" width="${n(hw * 2 + 12)}" height="${n(T * 0.08)}" fill="#c8ccc4"/>`);
+        o.push(`<rect x="${n(-hw - 6)}" y="${n(shY + T * 0.53)}" width="${n(hw * 2 + 12)}" height="${n(T * 0.02)}" fill="#e8e4c0" opacity=".6"/>`);
+        o.push(`<g transform="translate(${n(sw * 0.42)} ${n(shY + T * 0.28)})"><rect x="-13" y="-13" width="26" height="26" rx="4" fill="#e8e1cf"/><path d="M0 -8v16M-8 0h16" stroke="#9e1f26" stroke-width="6"/></g>`);
+        o.push(`<path d="M-12 ${n(shY + 4)}L4 ${n(shY + 24)}L20 ${n(shY + 4)}" stroke="${dk}" stroke-width="5" fill="none"/>`);
+        o.push(`<rect x="${n(-hw - 6)}" y="${n(hipY - 8)}" width="${n(hw * 2 + 12)}" height="10" fill="#1d232c"/>`);
+        break;
+      case 'sweater':
+        o.push(`<rect x="${n(-hw - 6)}" y="${n(hipY - 12)}" width="${n(hw * 2 + 12)}" height="14" rx="5" fill="${dk}"/>`);
+        for (let i = 0; i < 5; i++) o.push(`<path d="M${n(-hw + i * hw * 0.5)} ${n(hipY - 12)}v14" stroke="${shade(c, -0.4)}" stroke-width="2"/>`);
+        o.push(`<path d="M-16 ${n(shY + 2)}Q4 ${n(shY + 22)} 22 ${n(shY + 2)}" stroke="${dk}" stroke-width="8" fill="none"/>`);
+        o.push(`<ellipse cx="${n(sw * 0.2)}" cy="${n(shY + T * 0.3)}" rx="${n(sw * 0.35)}" ry="${n(T * 0.1)}" fill="#000" opacity=".12"/>`);
+        break;
       default:
         break;
     }
@@ -314,12 +336,20 @@
     const headY = shY - s.neck - s.headR * 0.85;
     o.push(`<g transform="rotate(${n(p.head)} 0 ${n(shY)})">`);
     o.push(`<rect x="${n(-s.neckW / 2)}" y="${n(shY - s.neck - 6)}" width="${n(s.neckW)}" height="${n(s.neck + 12)}" fill="${shade(s.skin, -0.12)}"/>`);
+    if (s.neckBite) o.push(`<g transform="translate(${n(s.neckW * 0.15)} ${n(shY - s.neck * 0.4)})"><ellipse rx="${n(s.neckW * 0.5)}" ry="${n(s.neck * 0.5)}" fill="#7a3434" opacity=".55"/>${[-0.3, 0, 0.3].map((k) => `<circle cx="${n(k * s.neckW)}" cy="${n(-s.neck * 0.22)}" r="2.6" fill="${PAL.blood}"/><circle cx="${n(k * s.neckW)}" cy="${n(s.neck * 0.26)}" r="2.6" fill="${PAL.blood}"/>`).join('')}</g>`);
     o.push(`<g transform="translate(0 ${n(headY)})">${head(s, p.expr)}</g>`);
     o.push(`</g>`);
     const armF = limb(s.shW * 0.28, shY + s.armW * 0.5, p.fSh, s.arm1, p.fEl, s.arm2);
     o.push(holdItem(p.holdF, armF, p));
     o.push(arm(armF, false, s.hideHand));
     if (!s.hideHand) o.push(hand(armF, false));
+    if (s.bandage && !s.hideHand) {
+      // gauze wrap on the forearm just above the wrist, with blood seeping through
+      const bx = armF.x1 + (armF.x2 - armF.x1) * 0.72, by = armF.y1 + (armF.y2 - armF.y1) * 0.72;
+      const ex = armF.x1 + (armF.x2 - armF.x1) * 0.92, ey = armF.y1 + (armF.y2 - armF.y1) * 0.92;
+      o.push(`<path d="M${n(bx)} ${n(by)}L${n(ex)} ${n(ey)}" stroke="#e8e4da" stroke-width="${n(s.armW * 0.95)}" stroke-linecap="butt"/>`);
+      o.push(`<circle cx="${n((bx + ex) / 2)}" cy="${n((by + ey) / 2)}" r="${n(s.armW * 0.24)}" fill="${PAL.blood}" opacity=".85"/>`);
+    }
     o.push(`</g>`);
     return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(sc * p.facing)} ${n(sc)})">${o.join('')}</g>`;
   }

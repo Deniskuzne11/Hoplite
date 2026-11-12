@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#0a0c12}</style></head>
+<body><div id="out"></div>
+<script src="../../episode01/art/lib.js"></script>
+<script src="lib2.js"></script>
+<script>
+const { person, head, CHAR, defs, PROPS, PAL, truck } = ART;
+const W = 1920, H = 2080, o = [];
+const label = (x, y, name, note, color) =>
+  `<text x="${x}" y="${y}" text-anchor="middle" font-family="DejaVu Sans" font-weight="bold" font-size="30" fill="${color || '#e8e3d8'}">${name}</text>` +
+  note.split('|').map((l, i) => `<text x="${x}" y="${y + 34 + i * 26}" text-anchor="middle" font-family="DejaVu Sans" font-size="20" fill="#8c93a3">${l}</text>`).join('');
+const card = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="#121722"/><ellipse cx="${x + w / 2}" cy="${y + h - 150}" rx="${w * 0.42}" ry="22" fill="#000" opacity=".45"/><circle cx="${x + w / 2}" cy="${y + h * 0.4}" r="${w * 0.6}" fill="url(#glowS)" opacity=".25"/>`;
+
+o.push(`<rect width="${W}" height="${H}" fill="#0a0c12"/>`);
+o.push(`<text x="40" y="70" font-family="DejaVu Sans" font-weight="bold" font-size="46" fill="#e8e3d8">06:00 · Episode 2 · <tspan fill="${PAL.sodium}">New characters</tspan> <tspan font-size="24" fill="#8c93a3" font-weight="normal">(same style as Episode 1)</tspan></text>`);
+
+const row1 = [
+  ['Dad', 'paramedic, tired|bandage on his wrist', CHAR.dad, { expr: 'tired', fSh: 20, fEl: 30, bSh: -8, bEl: 14 }, '#9fc0e0'],
+  ['Dad — sweating', 'wipes his forehead|(fever starting)', CHAR.dadSweat, { expr: 'tired', fSh: 150, fEl: 120, head: 6, bSh: -8, bEl: 14 }, '#9fc0e0'],
+  ['Dad — hides it', 'pulls his sleeve down|like Tall did', CHAR.dadHidden, { expr: 'stern', fSh: 12, fEl: 70, bSh: 35, bEl: 60, head: -6 }, '#9fc0e0'],
+  ['Shivering man', 'fever, bite on the neck', CHAR.feverMan, { expr: 'fever', fSh: 40, fEl: 80, bSh: 30, bEl: 85, lean: 6, crouch: 10, head: 8 }, '#d8c3a6'],
+  ['…turned', 'stopped shivering', CHAR.feverTurned, { expr: 'infected', fSh: 70, fEl: 10, bSh: 60, bEl: 20, lean: 14, head: -12 }, '#b8c79a'],
+  ['Ksyusha', 'crowbar, climbing out', CHAR.ksyusha, { expr: 'determined', holdF: 'crowbar', fSh: 150, fEl: 20, bSh: 170, bEl: -10 }, PAL.sodium],
+  ['Tyoma', '"I ran, just like he said"', CHAR.tyoma, { expr: 'whisper', fSh: 60, fEl: 20 }, '#e8c46a'],
+];
+row1.forEach(([name, note, s, pose, col], i) => {
+  const x = 30 + i * 268, y = 110, w = 252, h = 840;
+  o.push(card(x, y, w, h));
+  o.push(`<clipPath id="c1_${i}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"/></clipPath>`);
+  o.push(`<g clip-path="url(#c1_${i})">${person(s, pose, x + w / 2 - 14, y + h - 150, 1.38)}</g>`);
+  o.push(label(x + w / 2, y + h - 90, name, note, col));
+});
+
+o.push(`<text x="40" y="1030" font-family="DejaVu Sans" font-weight="bold" font-size="34" fill="#e8e3d8">Faces</text>`);
+const faces = [
+  [CHAR.dad, 'tired', 'Dad · tired'], [CHAR.dadSweat, 'tired', 'Dad · fever'], [CHAR.dad, 'stern', 'Dad · hiding'], [CHAR.dad, 'neutral', 'Dad · calm'],
+  [CHAR.feverMan, 'fever', 'man · fever'], [CHAR.feverTurned, 'infected', 'man · turned'], [CHAR.ksyusha, 'relieved', 'Ksyusha · relief'], [CHAR.tyoma, 'whisper', 'Tyoma · whisper'],
+];
+faces.forEach(([s, e, l], i) => {
+  const cx = 130 + (i % 4) * 230, cy = 1160 + Math.floor(i / 4) * 300;
+  o.push(`<rect x="${cx - 100}" y="${cy - 115}" width="200" height="270" rx="16" fill="#121722"/>`);
+  o.push(`<g transform="translate(${cx - 12} ${cy}) scale(${90 / s.headR / 1.1})">${head(s, e)}</g>`);
+  o.push(`<text x="${cx}" y="${cy + 135}" text-anchor="middle" font-family="DejaVu Sans" font-size="21" fill="#8c93a3">${l}</text>`);
+});
+
+o.push(`<text x="990" y="1030" font-family="DejaVu Sans" font-weight="bold" font-size="34" fill="#e8e3d8">Props</text>`);
+o.push(`<rect x="980" y="1050" width="910" height="1000" rx="18" fill="#121722"/>`);
+o.push(PROPS.bandage(1020, 1100));
+o.push(PROPS.grate(1460, 1090, 260, 200));
+o.push(`<g>${truck(1440, 1900, 0.85, -1, 0.9)}</g>`);
+[["Dad's bandage", 1195, 1300], ['vent grate', 1590, 1330], ['convoy truck', 1440, 1960]].forEach(([t, x, y]) =>
+  o.push(`<text x="${x}" y="${y}" text-anchor="middle" font-family="DejaVu Sans" font-size="22" fill="#8c93a3">${t}</text>`));
+
+document.getElementById('out').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${defs()}${o.join('')}</svg>`;
+</script></body></html>

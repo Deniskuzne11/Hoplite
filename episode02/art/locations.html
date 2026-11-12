@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#0a0c12}</style></head>
+<body><div id="out"></div>
+<script src="../../episode01/art/lib.js"></script>
+<script src="lib2.js"></script>
+<script>
+const { SCENES, defs, PAL } = ART;
+const tw = 400, th = 711, gap = 30, W = 4 * tw + 5 * gap, H = 110 + th + 90;
+const list = [
+  ['tunnel', '1 · Tunnel under the stands', 'locked door, caged lamp, vent'],
+  ['shaft', '2 · Vent shaft', 'light at the far end'],
+  ['standsTop', '3 · Top of the stands', 'dawn, convoy leaving'],
+  ['apartment', '4 · Flashback: home', 'Dad leaves, 3 days ago'],
+];
+const o = [`<rect width="${W}" height="${H}" fill="#0a0c12"/>`,
+  `<text x="${gap}" y="70" font-family="DejaVu Sans" font-weight="bold" font-size="44" fill="#e8e3d8">06:00 · Episode 2 · <tspan fill="${PAL.sodium}">New locations</tspan> <tspan font-size="24" fill="#8c93a3" font-weight="normal">(9:16 frames)</tspan></text>`];
+list.forEach(([k, title, note], i) => {
+  const x = gap + i * (tw + gap), y = 110;
+  o.push(`<svg x="${x}" y="${y}" width="${tw}" height="${th}" viewBox="0 0 1080 1920">${SCENES[k]()}</svg>`);
+  o.push(`<rect x="${x}" y="${y}" width="${tw}" height="${th}" fill="none" stroke="#2a3040" stroke-width="2"/>`);
+  o.push(`<text x="${x}" y="${y + th + 32}" font-family="DejaVu Sans" font-weight="bold" font-size="24" fill="#e8e3d8">${title}</text>`);
+  o.push(`<text x="${x}" y="${y + th + 60}" font-family="DejaVu Sans" font-size="19" fill="#8c93a3">${note}</text>`);
+});
+document.getElementById('out').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${defs()}${o.join('')}</svg>`;
+</script></body></html>
