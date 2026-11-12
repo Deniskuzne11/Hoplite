@@ -1,0 +1,114 @@
+06:00 — Episode 1 — SOUND SOURCES
+=================================
+
+Every sound effect and the music in this episode is from Freesound (https://freesound.org)
+and is released under Creative Commons 0 (CC0 1.0 Universal, public domain dedication):
+https://creativecommons.org/publicdomain/zero/1.0/
+CC0 allows any use, including commercial, with no attribution required. Authors are listed anyway.
+The license was checked on each sound's own Freesound page at download time.
+Files used are the Freesound HQ previews (MP3); they were trimmed, faded, re-levelled and mixed.
+Voice: generated with ElevenLabs (model eleven_v3, premade voice "Jessica") — not CC0; see SERIES.md.
+On the ElevenLabs free plan the voice is for non-commercial use and requires attribution to ElevenLabs.
+No copyrighted music is used.
+
+ 1. BACKGROUND MUSIC — whole episode (slowed to 0.82x, about 19 dB under the voice)
+    "spacedrone3.wav" by Elektrocell — Freesound #20705
+    Page:    https://freesound.org/people/Elektrocell/sounds/20705/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/music_spacedrone.mp3
+
+ 2. heartbeat — opening hook, last scene, final black frame
+    "heart beat.mp3" by greyseraphim — Freesound #21409
+    Page:    https://freesound.org/people/greyseraphim/sounds/21409/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/heartbeat.mp3
+
+ 3. radio static — kitchen, the evacuation announcement
+    "Radio Noise.wav" by RutgerMuller — Freesound #50750
+    Page:    https://freesound.org/people/RutgerMuller/sounds/50750/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/radio_static.mp3
+
+ 4. quiet city night (crickets) — street, bridge, courtyards
+    "city-night-quiet.wav" by ragamuffin — Freesound #197211
+    Page:    https://freesound.org/people/ragamuffin/sounds/197211/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/amb_city_night.mp3
+
+ 5. footsteps — walking down the street and through the courtyards
+    "footsteps shoes walk road asphalt hard.flac" by kyles — Freesound #637556
+    Page:    https://freesound.org/people/kyles/sounds/637556/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/steps_walk.mp3
+
+ 6. running footsteps — running into the men; the crowd
+    "running on the street" by launemax — Freesound #249923
+    Page:    https://freesound.org/people/launemax/sounds/249923/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/steps_run.mp3
+
+ 7. board breaking — "the board came off with a crash"
+    "Wooden Door breaks" by Saladsounds — Freesound #723974
+    Page:    https://freesound.org/people/Saladsounds/sounds/723974/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/wood_break.mp3
+
+ 8. wood splinters — tail of the crash
+    "Wood panel board cracking snapping long" by LampEight — Freesound #400645
+    Page:    https://freesound.org/people/LampEight/sounds/400645/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/wood_crack.mp3
+
+ 9. wood creaking — prying the board with the crowbar
+    "DoorCreak.wav" by 0XMUSEX0 — Freesound #168650
+    Page:    https://freesound.org/people/0XMUSEX0/sounds/168650/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/creak_door.mp3
+
+10. creak — courtyards
+    "Creaking" by Lightnessko — Freesound #390323
+    Page:    https://freesound.org/people/Lightnessko/sounds/390323/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/creak.mp3
+
+11. distant moan — the infected on the bridge
+    "A Moaning Zombie.wav" by kathol — Freesound #58626
+    Page:    https://freesound.org/people/kathol/sounds/58626/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/zombie_moan.mp3
+
+12. crowd of the infected — the bridge turns; the crowd runs past the doorway
+    "Horde of Dragonkin or Zombies" by SnowFightStudios — Freesound #669845
+    Page:    https://freesound.org/people/SnowFightStudios/sounds/669845/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/zombie_horde.mp3
+
+13. rifle shot — "his partner stepped back and fired"
+    "AR15 rifle shot" by michorvath — Freesound #427596
+    Page:    https://freesound.org/people/michorvath/sounds/427596/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/gunshot.mp3
+
+14. wind — bridge reveal, stadium stands
+    "Wind Gust" by crashoverride6 — Freesound #146932
+    Page:    https://freesound.org/people/crashoverride6/sounds/146932/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/wind_gust.mp3
+
+15. distant thunder — heat lightning in the kitchen window
+    "Thunder3" by Yoyodaman234 — Freesound #267550
+    Page:    https://freesound.org/people/Yoyodaman234/sounds/267550/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/thunder.mp3
+
+16. rain on pavement — from the torn palm to the end
+    "rain medium on street pavement.flac" by kyles — Freesound #454143
+    Page:    https://freesound.org/people/kyles/sounds/454143/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/rain_street.mp3
+
+17. electric hum — stadium floodlights
+    "Neon Lamp, Switch On, Hum" by Kinoton — Freesound #351430
+    Page:    https://freesound.org/people/Kinoton/sounds/351430/
+    License: CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/)
+    Fetched: 2026-11-12   Local file: sound/raw/neon_hum.mp3
